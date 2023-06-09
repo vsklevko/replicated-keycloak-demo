@@ -1,0 +1,53 @@
+apiVersion: kots.io/v1beta1
+kind: HelmChart
+metadata:
+  name: keycloak
+spec:
+  # chart identifies a matching chart from a .tgz
+  chart:
+    name: keycloak
+    chartVersion: 15.1.3
+
+  # helmVersion identifies the Helm Version used to render the Chart. Default is v2.
+  helmVersion: v3
+
+  # useHelmInstall identifies whether this Helm chart will use the
+  # Replicated Helm installation (false) or native Helm installation (true). Default is false.
+  # Native Helm installations are only available for Helm v3 charts.
+  useHelmInstall: true
+
+  # values are used in the customer environment, as a pre-render step
+  # these values will be supplied to helm template
+  values:
+    keycloak:
+        KEYCLOAK_CLIENT_ID: '{{repl ConfigOption `keycloak_client_id`}}'
+        KEYCLOAK_CLIENT_SECRET: '{{repl ConfigOption `keycloak_client_secret`}}'
+        KEYCLOAK_REALM_URL: '{{repl ConfigOption `keycloak_realm`}}'
+  optionalValues:
+    - when: 'repl{{ ConfigOptionEquals `keycloak` `keycloak_embedded`}}'
+      recursiveMerge: true
+      values:
+        config:
+          keycloak:
+            KEYCLOAK_TYPE: 'embedded'
+            KEYCLOAK_ADMIN_USER: '{{repl ConfigOption `keycloak_admin_user`}}'
+            KEYCLOAK_ADMIN_PASSWORD: '{{repl ConfigOption `keycloak_admin_password`}}'
+    - when: 'repl{{ ConfigOptionEquals `keycloak` `keycloak_external`}}'
+      recursiveMerge: true
+      values:
+        config:
+          keycloak:
+            KEYCLOAK_TYPE: 'external'
+    - when: 'repl{{ and (ConfigOptionEquals `keycloak` `keycloak_embedded`) (ConfigOptionEquals `keycloak_resources` `keycloak_resources_custom`) }}'
+      recursiveMerge: true
+      values:
+        config:
+          keycloak:
+            KEYCLOAK_LIMITS_MEMORY: '{{repl ConfigOption `resources_keycloak_limit_memory`}}'
+            KEYCLOAK_REQUESTS_MEMORY: '{{repl ConfigOption `resources_keycloak_request_memory`}}'
+            KEYCLOAK_LIMITS_CPU: '{{repl ConfigOption `resources_keycloak_limit_cpu`}}'
+            KEYCLOAK_REQUESTS_CPU: '{{repl ConfigOption `resources_keycloak_request_cpu`}}'
+
+  # builder values provide a way to render the chart with all images
+  # and manifests. this is used in replicated to create airgap packages
+  builder: {}

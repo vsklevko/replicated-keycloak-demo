@@ -1,0 +1,32 @@
+apiVersion: app.k8s.io/v1beta1
+kind: Application
+metadata:
+  name: settlemint-platform
+spec:
+  selector:
+    matchLabels:
+      kots.io/app-slug: settlemint-platform
+  addOwnerRef: true
+  descriptor:
+    type: 'settlemint'
+    keywords:
+      - 'blockchain'
+    links:
+      - description: About
+        url: 'https://settlemint.com/'
+      - description: Usage Documentation
+        url: 'https://console.settlemint.com/documentation/'
+      - description: Install Documentation
+        url: 'https://docs-onprem.settlemint.com/settlemint/AnGFoPJOMfRTQ1eAX9TL/'
+    version: '7.0.0-release.5109482253'
+    description: 'SettleMint'
+    icons:
+      - src: 'https://res.cloudinary.com/practicaldev/image/fetch/s--I1k_5qM---/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://thepracticaldev.s3.amazonaws.com/i/dp51une42j0d8uas60cx.png'
+        type: 'image/png'
+        size: '512x512'
+    maintainers:
+      - name: SettleMint Support
+        email: support@settlemint.com
+    owners:
+      - name: SettleMint
+        email: hello@settlemint.com
