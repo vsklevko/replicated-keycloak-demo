@@ -10,10 +10,12 @@ spec:
   descriptor:
     links:
       - description: About This Chart
-        url: 'https://bitnami.com/stack/keycloak/helm'
-    version: '15.1.3'
-    description: 'Keycloak'
+        url: "https://bitnami.com/stack/keycloak/helm"
+      - description: "Go to Keycloak"
+        url: https://my-application-url
+    version: "15.1.3"
+    description: "Keycloak"
     icons:
-      - src: 'https://res.cloudinary.com/practicaldev/image/fetch/s--I1k_5qM---/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://thepracticaldev.s3.amazonaws.com/i/dp51une42j0d8uas60cx.png'
-        type: 'image/png'
-        size: '512x512'
+      - src: "https://res.cloudinary.com/practicaldev/image/fetch/s--I1k_5qM---/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://thepracticaldev.s3.amazonaws.com/i/dp51une42j0d8uas60cx.png"
+        type: "image/png"
+        size: "512x512"

@@ -23,7 +23,7 @@ spec:
           when: '{{repl ConfigOptionEquals "keycloak" "keycloak_embedded"}}'
           type: text
           required: true
-          default: "support@settlemint.com"
+          default: "support@replicated.com"
 
         - name: keycloak_admin_password
           title: Admin password

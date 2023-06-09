@@ -3,8 +3,11 @@ kind: Application
 metadata:
   name: keycloak-application
 spec:
-  title: SettleMint
+  title: Keycloak
   icon: https://res.cloudinary.com/practicaldev/image/fetch/s--I1k_5qM---/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://thepracticaldev.s3.amazonaws.com/i/dp51une42j0d8uas60cx.png
-  #statusInformers:
-  #  - service/settlemint
+  statusInformers:
+    - service/keycloak
+    - service/keycloak-headless
+    - service/keycloak-postgresql
+    - service/keycloak-postgresql-hl
   allowRollback: true
